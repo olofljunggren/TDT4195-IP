@@ -109,6 +109,121 @@ Useful soruce: https://medium.com/@stanleydukor neural-representation-of-and-or-
 
 
 ## Task 3.b
+A hyperparameter is values related to a nerual net which has to be initiated. For instance this can be the number of epochs and the batch size. One epoch corresponds for the model walking thorugh all the data one time. The batch size is the number of times the net skips to update the model parameters. So if batch equals two it will only train for "every second" value.  
 
 
+## Task 3.c
+[0.2pt] Why is the softmax activation functioned used in the last layer for neural networks trained to classify objects?
 
+Softmax is the last layer of a neural net and has the same size as the output. This is used to create probabilities for a classifier. This makes it easier to make decisions from the data. Also it gives more information than just using max which will return zeros and a single one.
+
+
+## Task 3.d
+[0.7pt] Figure 2 shows a simple neural network. Perform a forward pass and backward pass on this network with the given input values. Use Equation 3 as the cost function and let the target value be y = 1.
+
+![Forward and backward propagation.
+](assignment1/image_solutions/assign1_task3d.jpg)
+
+
+## Task 3.e
+[0.3pt] Compute the updated weights w1, w3, and b1 by using gradient descent and the values you found in task d. Use α = 0.1
+
+![Updating parameter with gradient descent.
+](assignment1/image_solutions/assign1_task3e.jpg)
+
+
+# Task 4: Programming [2.4pt]
+
+## Task 4.a
+[0.6pt] Use the given starter code and train a single-layer neural network with batch size of 64. Then, normalize every image between a range of [-1. 1], and train the network again. Plot the training and validation loss from both of the networks in the same graph. Include the graph in your report. Do you notice any difference when training your network with/without normalization?
+
+![Normalized training data.
+](assignment1/image_solutions/task4a_both.png)
+
+- It appears that the normalized network converges faster than the not normalized one. Although it seems that the training took a little bit more time when using normalization. Overall the biggest advantage is the faster and more consistent performance.
+
+
+## Task 4.b
+[0.6pt] The trained neural network will have one weight with shape [num classes, 28 × 28]. To visualize the learned weight, we can plot the weight as a 28 × 28 grayscale image. For each digit (0-9), plot the learned weight as a 28 × 28 image. In your report, include the image for each weight,and describe what you observe (1-2 sentences).
+
+<!-- ![Number 0 weights.
+](assignment1/image_solutions/number0.png) -->
+
+- I began explaining each of the weights but then realized maybe you just wanted overall comments. So generally we have high weights for the written part / shape of the number. The other part is a low weight part which can help to distinguish characteristics.
+
+<img src="assignment1/image_solutions/number0.png" width="100">
+
+- Number 0: The most important features here is the low value weights in middle corresponding to the hole in the zero. Also it seems like a round ring with higher weights.
+
+<img src="assignment1/image_solutions/number1.png" width="100">
+
+- Number 1: Here it seems like the most important part is the vertical line in the middle. There is also smaller weights around to really discretize the line. 
+
+<img src="assignment1/image_solutions/number2.png" width="100">
+
+- Number 2: For the two we can see a little bit of high values in the shape of a two. Though the most critical part looks to be the low weights for the pixels in the "upper hook".
+
+<img src="assignment1/image_solutions/number3.png" width="100">
+
+- Number 3: Also here the shape of the high weights corresponds to the number three. Here we also have a low weight part which amplifies the shape of the number. In this case an arc.
+
+<img src="assignment1/image_solutions/number4.png" width="100">
+
+<img src="assignment1/image_solutions/number5.png" width="100">
+
+<img src="assignment1/image_solutions/number6.png" width="100">
+
+<img src="assignment1/image_solutions/number7.png" width="100">
+
+<img src="assignment1/image_solutions/number8.png" width="100">
+
+<img src="assignment1/image_solutions/number9.png" width="100">
+
+
+<!-- ![Number 1 weights.
+](assignment1/image_solutions/number1.png)
+
+![Number 2 weights.
+](assignment1/image_solutions/number2.png)
+
+![Number 3 weights.
+](assignment1/image_solutions/number3.png)
+
+![Number 4 weights.
+](assignment1/image_solutions/number4.png)
+
+![Number 5 weights.
+](assignment1/image_solutions/number5.png)
+
+![Number 6 weights.
+](assignment1/image_solutions/number6.png)
+
+![Number 7 weights.
+](assignment1/image_solutions/number7.png)
+
+![Number 8 weights.
+](assignment1/image_solutions/number8.png)
+
+![Number 9 weights.
+](assignment1/image_solutions/number9.png) -->
+
+
+## Task 4.c
+[0.6pt] Set the learning rate to lr = 1.0, and train the network from scratch. Report the accuracy and average cross entropy loss on the validation set. In 1-2 sentences, explain why the network achieves worse/better accuracy than previously.
+
+
+![Increased learning rate.
+](assignment1/image_solutions/task4c.png)
+
+
+- Final Test loss: 2.8491579969802894. Final Test accuracy: 0.8631
+- The reason the network performed worse is the too high learning rate. Ideally increaseing learning rate might just improve the speed of the convergence. Though in this case it seems like the network did not really converge to anything at all. It just oscillated around some point.
+
+## Task 4.d
+[0.6pt] Include an hidden layer with 64 nodes in the network, with ReLU as the activation function for the first layer. Train this network with the same hyperparameters as previously. Plot the training and validation loss from this network together with the loss from task (a). Include the plot in your report. What do you observe?
+
+
+![Initial compared to relu.
+](assignment1/image_solutions/task_4d_both.png)
+
+- In this case I observe a significantly better and fast convergence than the linear model. This makes some sense since the numbers can not really be describes linearly.
