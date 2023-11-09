@@ -33,30 +33,44 @@ This is a HTML-style comment, not visible in the final PDF.
 ## Task 1.a 
 [0.1pt] Given a single convolutional layer with a stride of 1, kernel size of 7 × 7, and 6 filters. If want the output shape (Height ×Width) of the convolutional layer to be equal to the input image, how much padding should I use on each side?
 
+- The number of filters does not matter.
 
-- fsdfsdfsfsf
+![Task 1a.
+](image_processed/Task1a.jpg)
 
 
 ## Task 1.b
 [0.2pt] You are told that the spatial dimensions of the feature maps in the first layer are 506 × 506, and that there are 12 feature maps in the first layer. Assuming that no padding is used, the stride is 1, and the kernel used are square, and of an odd size, what are the spatial dimensions of these kernels? Give the answer as (Height) × (Width).
 
-- fsfsdfdsfsdfs
+
+![Task 1b.
+](image_processed/Task1b.jpg)
+
 
 ## Task 1.c
 [0.2pt] If subsampling is done using neighborhoods of size 2 × 2, with a stride of 2, what are the spatial dimensions of the pooled feature maps in the first layer? (assume the input has a shape of 506 × 506). Give the answer as (Height) × (Width).
 
-- fsfsfsffsfs
+
+![Task 1c.
+](image_processed/Task1c.jpg)
+
 
 ## Task 1.d
 [0.2pt] The spatial dimensions of the convolution kernels in the second layer are 3 × 3. Assuming no padding and a stride of 1, what are the sizes of the feature maps in the second layer? (assume the input shape is the answer from the last task). Give the answer as (Height) × (Width).
 
-![Histogram.
-](image_solutions/picture.jpg)
+
+![Task 1d.
+](image_processed/Task1d.jpg)
+
+
+
 
 ## Task 1.e
 [0.3pt] Table 1 shows a simple CNN. How many parameters are there in the network? In this network, the number of parameters is the number of weights + the number of biases. Assume the network takes in an 32 × 32 image.
 
-- fsfsffs
+
+![Task 1e.
+](image_processed/Task1e.jpg)
 
 
 # Task 2: Programming, Convolutional Neural Networks [2 points]
@@ -87,6 +101,8 @@ This is a HTML-style comment, not visible in the final PDF.
 ## Task 2.d
 [0.5pt] Looking at the visualized filter, and its corresponding activation on the zebra image, describe what kind of feature each filter extracts. Explain your reasoning.
 
+- The first filter seem to extract some vertical edges. Looks realistic considering the kernel. The second filter seems to extract some diagonal edges. The third filter extracts green colors from the picture. The fourth one seems to extract horizontal lines which in this case corrsponded to the contours of the zebra. The last and fifth filter extracts blue colors from the image.
+
 
 # Task 3: Theory, Filtering in the Frequency Domain [1 points]
 
@@ -95,7 +111,11 @@ This is a HTML-style comment, not visible in the final PDF.
 [0.6pt] Given the images in the spatial and frequency domain in Figure 3, pair each image in the spatial domain (first row) with a single image in the frequency domain (second row). Explain your reasoning.
 
 
-- First of all we can distinguish pictures which varies sideways (x-direction). This means that 1d, 1e and 1f belongs to 2a, 2b and 2d. Since the discrete fourier transform is mirrored for negative frequencies we can study only positive ones. A impulse/point far away from the center in the frequency domain indicates high frequencies. With this reasoning we get that F{1e}=2b, F{1f}=2a, F{1d}=2d. Similarly we get that: F{1a}=2f, F{1b}=2c, F{1c}=2e.
+- First of all we can distinguish pictures which varies sideways (x-direction). This means that 1d, 1e and 1f belongs to 2a, 2b and 2d. Since the discrete fourier transform is mirrored for negative frequencies we can study only positive ones. An impulse/point far away from the center in the frequency domain indicates high frequencies. With this reasoning we get that F{1e}=2b, F{1f}=2a, F{1d}=2d. Similarly we get that: F{1a}=2f, F{1b}=2c, F{1c}=2e.
+
+
+![Task 3a.
+](image_processed/task3a.png)
 
 
 ## Task 3.b
@@ -108,6 +128,11 @@ This is a HTML-style comment, not visible in the final PDF.
 ## Task 3.c 
 [0.3pt] The amplitude |F{g}| of two commonly used convolution kernels can be seen in Figure 4. For each kernel (a, and b), figure out what kind of kernel it is (high- or low-pass). Shortly explain your reasoning.
 
+
+![Task 3c.
+](image_processed/task3c.png)
+
+
 - Just looking at equation 3 we can easily see that the lowest frquencies are mapped onto lowest u and v values. In other words if we were to create a low-pass kernel we would use values close to 1 close to the center of the kernel (in the frequency domain) and values closer to 0 at the edges. Similar reasoning as in the previous exercise. Hence (a) is the fourier transform of a high-pass and (b) is the fourier transform of a low-pass. 
 
 
@@ -115,5 +140,57 @@ This is a HTML-style comment, not visible in the final PDF.
 # Task 4: Programming, Filtering in the Frequency Domain [2 points]
 
 
-# Task 1.a
+## Task 4.a
+[0.5pt] Implement a function that takes an grayscale image, and a kernel in the frequency domain, and applies the convolution theorem (seen in Equation 4). Try it out on a low-pass filter and a high-pass filter on the grayscale image ”camera man”(im = skimage.data.camera()). Include in your report the filtered images and the before/after amplitude |F{f}| of the transform.
 
+
+- The ringing effekt will be due to frequency domain aliasing. This happens for large frequencies and is explained by the sampling theorem. This can be solved by zero padding the image to double size. 
+
+
+![Low pass filtering.
+](image_processed/lowpass.png)
+
+
+![Close look low pass camera man.
+](image_processed/camera_low_pass.png)
+
+
+![High pass filtering.
+](image_processed/highpass.png)
+
+
+![Close look high pass camera man.
+](image_processed/camera_high_pass.png)
+
+
+## Task 4.b
+[0.2pt] Implement a function that takes an grayscale image, and a kernel in the spatial domain, and applies the convolution theorem. Try it out on the gaussian kernel given in assignment 1, and a horizontal sobel filter (Gx).
+
+
+- As we can see the gaussian kernel has kind of a lowpass effect and the sobel kernel has vertical edge detection. (I some sense highpass effect).
+
+
+![Gaussian kernel camera man.
+](image_processed/camera_man_gaussian.png)
+
+
+![Close look high pass camera man.
+](image_processed/camera_man_sobel.png)
+
+
+## Task 4.c
+[0.7pt] Use what you’ve learned from the lectures and the recommended resources to remove the noise in the image seen in Figure 5a. Note that the noise is a periodic signal. 
+
+- By taking the fourier transform we can find som noise. By applying a allpass filter with a zero line we can remove that noise.
+
+
+![Close look high pass camera man.
+](image_processed/moon_filtered.png)
+
+
+## Task 4.d
+[0.6pt] Now we will create a function to automatically find the rotation of scanned documents, such that we can align the text along the horizontal axis.
+
+
+![Close look high pass camera man.
+](image_processed/rotated_pages.png)
