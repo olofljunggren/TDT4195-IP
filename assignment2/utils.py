@@ -50,6 +50,8 @@ def compute_loss_and_accuracy(dataloader, model, loss_function):
     model.train()
     loss_avg = loss_avg / total_steps
     accuracy = total_correct / total_images
+    print(total_images)
+    print(total_correct)
     return loss_avg, accuracy
 
 
